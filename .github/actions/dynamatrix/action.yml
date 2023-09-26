@@ -1,0 +1,19 @@
+name: Create matrix
+description: Create matrix
+inputs:
+  matrixstr:
+    description: 'input yaml matrix as multiline string'
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+    - run: |
+        import json
+        import yaml
+        
+        # FIXME: this is subject to code injection; sanity check required
+        y = yaml.safe_load("""${{ inputs.matrixstr }}""")
+        print(json.dumps(y))
+      shell: python3

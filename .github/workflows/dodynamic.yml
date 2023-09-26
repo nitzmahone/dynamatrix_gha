@@ -1,0 +1,20 @@
+on:
+- push
+
+jobs:
+  make_matrix:
+    runs-on: ubuntu-latest
+#    outputs:
+#      matrix: ${{ steps.make_matrix.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: make a matrix
+      uses: ./.github/actions/dynamatrix
+      with:
+        matrixstr: |
+          - some
+          - yaml
+          - embedded_template_event_name: ${{ github.event_name }}
+          - with:
+              subdict: blar
+              subdict2: blar2
