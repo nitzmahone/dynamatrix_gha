@@ -11,7 +11,7 @@ runs:
   steps:
     - run: |
         # FIXME: input sanity check to prevent shell injection
-        python3 $GITHUB_ACTION_PATH/matrix_yaml_to_json.py << 'EOF'
+        python3 $GITHUB_ACTION_PATH/matrix_yaml_to_json.py << EOF
         ${{ inputs.matrixstr }}
         EOF
       shell: sh
