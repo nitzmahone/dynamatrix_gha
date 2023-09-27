@@ -10,10 +10,10 @@ runs:
 
   steps:
     - run: |
-        import json
-        import yaml
-        
-        # FIXME: this is subject to code injection; sanity check required
-        y = yaml.safe_load("""${{ inputs.matrixstr }}""")
-        print(json.dumps(y))
-      shell: python3
+        printenv
+        pwd
+        ls -lR
+
+        # FIXME: input sanity check to prevent shell injection
+        python3 matrix_yaml_to_json.py
+      shell: sh
