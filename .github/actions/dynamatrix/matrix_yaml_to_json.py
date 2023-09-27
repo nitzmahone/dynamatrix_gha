@@ -1,6 +1,8 @@
 import json
+import sys
 import yaml
 
-# FIXME: this is subject to code injection; sanity check required
-y = yaml.safe_load("""${{ inputs.matrixstr }}""")
+
+y = yaml.safe_load(sys.stdin)
+
 print(json.dumps(y))

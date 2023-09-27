@@ -10,7 +10,6 @@ runs:
 
   steps:
     - run: |
-        echo '${{ inputs.matrixstr }}'
         # FIXME: input sanity check to prevent shell injection
         python3 $GITHUB_ACTION_PATH/matrix_yaml_to_json.py << EOF
         ${{ inputs.matrixstr }}
