@@ -12,9 +12,101 @@ jobs:
       uses: ./.github/actions/dynamatrix
       with:
         matrixstr: |
-          - some
-          - yaml
-          - embedded_template_event_name: ${{ github.event_name }}
-          - with:
-              subdict: blar
-              subdict2: blar2
+          include:
+            - spec: cp38-manylinux_x86_64
+            - spec: cp39-manylinux_x86_64
+            - spec: cp310-manylinux_x86_64
+            - spec: cp311-manylinux_x86_64
+            - spec: cp312-manylinux_x86_64
+    
+            - spec: cp38-manylinux_i686
+            - spec: cp39-manylinux_i686
+            - spec: cp310-manylinux_i686
+            - spec: cp311-manylinux_i686
+            - spec: cp312-manylinux_i686
+    
+            - spec: cp39-musllinux_x86_64
+            - spec: cp310-musllinux_x86_64
+            - spec: cp311-musllinux_x86_64
+            - spec: cp312-musllinux_x86_64
+    
+            - spec: cp39-musllinux_i686
+            - spec: cp310-musllinux_i686
+            - spec: cp311-musllinux_i686
+            #- spec: cp312-musllinux_i686  # busted as of 9/22/23
+    
+            - spec: cp38-manylinux_aarch64
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp39-manylinux_aarch64
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp310-manylinux_aarch64
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp311-manylinux_aarch64
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp312-manylinux_aarch64
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+    
+            - spec: cp38-manylinux_ppc64le
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+          
+            - spec: cp39-manylinux_ppc64le
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp310-manylinux_ppc64le
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp311-manylinux_ppc64le
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp312-manylinux_ppc64le
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+    
+            - spec: cp38-manylinux_s390x
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp39-manylinux_s390x
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp310-manylinux_s390x
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp311-manylinux_s390x
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
+
+            - spec: cp312-manylinux_s390x
+              foreign_arch: true
+              test_args: '{project}/src/c'
+              omit: ${{ github.repository_owner != 'rolpdog' }}
