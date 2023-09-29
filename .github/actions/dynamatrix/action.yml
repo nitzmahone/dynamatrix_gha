@@ -2,16 +2,21 @@ name: Create matrix
 description: Create matrix
 inputs:
   matrixstr:
-    description: 'input yaml matrix as multiline string'
+    description: input yaml matrix as multiline string
     required: true
+outputs:
+  matrix_json:
+    description: filtered matrix as JSON
+    value: ${{ steps.matrix_gen.outputs.matrix_json }}
 
 runs:
   using: "composite"
 
   steps:
-    - run: |
+    - id: matrix_gen
+      run: |
         # FIXME: input sanity check to prevent shell injection
-        python3 $GITHUB_ACTION_PATH/matrix_yaml_to_json.py << EOF
+        python3 $GITHUB_ACTION_PATH/matrix_yaml_to_json.py --from-stdin << EOF
         ${{ inputs.matrixstr }}
         EOF
       shell: bash
