@@ -11,12 +11,14 @@ import yaml
 
 from collections.abc import MutableMapping, Sequence
 
+skipped_entries = []
 
 def _filter_omit_entries(value):
     if isinstance(value, MutableMapping):
         if (omit_value := value.pop('omit', ...)) is not ...:
             if omit_value is True:
                 print(f'omitting {value} from matrix')
+                skipped_entries.append(value)
                 return ...
 
         return {k: v for k, v in ((k, _filter_omit_entries(v)) for k, v in value.items()) if v is not ...}
@@ -52,13 +54,16 @@ def main():
     filtered_matrix = _filter_omit_entries(raw_matrix)
 
     output_matrix_json = json.dumps(filtered_matrix)
+    output_skipped_matrix_json = json.dumps(skipped_entries)
 
-    print(f'output: {output_matrix_json}')
+    print(f'filtered matrix: {output_matrix_json}')
+    print(f'skipped entries: {output_skipped_matrix_json}')
 
     if (gh_output := os.environ.get('GITHUB_OUTPUT')):
-        print('setting step output var matrix_json...')
+        print('setting step output var matrix_json; skipped_matrix_json...')
         with pathlib.Path(gh_output).open('a') as env_fd:
             env_fd.write(f'matrix_json<<__MATRIX_EOF\n{output_matrix_json}\n__MATRIX_EOF\n')
+            env_fd.write(f'skipped_matrix_json<<__MATRIX_EOF\n{output_skipped_matrix_json}\n__MATRIX_EOF\n')
     else:
         print("GITHUB_OUTPUT not set; skipping variable output")
 

@@ -23,7 +23,7 @@ jobs:
       id: make_matrix
       uses: ./.github/actions/dynamatrix
       with:
-        matrixstr: |
+        matrixstr:
           include:
             - spec: cp38-manylinux_x86_64
             - spec: cp39-manylinux_x86_64
