@@ -1,7 +1,7 @@
 name: Create matrix
 description: Create matrix
 inputs:
-  matrixstr:
+  matrix_yaml:
     description: input yaml matrix as multiline string
     required: true
 outputs:
@@ -17,6 +17,6 @@ runs:
       run: |
         # FIXME: input sanity check to prevent shell injection
         python3 $GITHUB_ACTION_PATH/matrix_yaml_to_json.py --from-stdin << EOF
-        ${{ inputs.matrixstr }}
+        ${{ inputs.matrix_yaml }}
         EOF
       shell: bash
